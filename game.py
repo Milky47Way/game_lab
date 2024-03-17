@@ -43,6 +43,32 @@ class Enemy(GameSprite):
         else:
             self.rect.x += self.speed
 
+class Wall(sprite.Sprite):
+    def __init__(self, color1, color2, color3, wall_x, wall_y, wall_width, wall_height):
+        super().__init__()
+        self.color1 = color1
+        self.color2 = color2
+        self.color3 = color3
+        self.wall_width = wall_width
+        self.wall_height = wall_height
+        self.image = Surface((self.wall_width, self.wall_height))
+        self.image.fill((color1, color2, color3))
+        self.rect = self.image.get_rect()
+        self.rect.x = wall_x
+        self.rect.y = wall_y
+
+    def draw_wall(self):
+        window.blit(self.image, (self.rect.x, self.rect.y))
+
+w1 = Wall(154, 205, 50, 100, 20, 450, 10)
+w2 = Wall(154, 205, 50, 100, 20, 10, 380)
+w3 = Wall(154, 205, 50, 20, 30, 10,300)
+w4 = Wall(154, 205, 50, 150, 453, 10, 50)
+w5 = Wall(154, 205, 50, 205, 48, 170, 10)
+
+
+
+
 player = Player('Picsart_24-03-03_16-20-54-518.png', 5, win_height - 80, 4) #xyspeed
 monster = Enemy('Picsart_24-03-10_13-47-07-589.png', win_width - 80, 280, 3)
 
@@ -55,6 +81,12 @@ goal = GameSprite('Picsart_24-03-10_13-48-25-689.png', 600, 390, 0)
 #mixer_music.load('#mp3')
 #mixer_music.play()
 
+font.init()
+font1 = font.Font(None, 70)
+win = font1.render('You win!', True, (255, 215, 0))
+lose = font1.render('You lose!', True, (255, 0, 0))
+
+
 while game:
     for e in event.get():
         if e.type == QUIT:
@@ -65,5 +97,20 @@ while game:
     goal.reset()
     player.reset()
     monster.reset()
+    w1.draw_wall()
+    w2.draw_wall()
+    w3.draw_wall()
+    w4.draw_wall()
+    w5.draw_wall()
+
+    if sprite.collide_rect(player, goal):
+        window.blit(win, (200, 200))
+    if sprite.collide_rect(player, monster) or
+        sprite.collide_rect(player, w1) or
+        sprite.collide_rect(player, w2) or
+        sprite.collide_rect(player, w3) or
+        sprite.collide_rect(player, w4) or
+        sprite.collide_rect(player, w5) or
+        window.blit(lose, (200, 200))
     display.update()
     clock.tick(FPS)
