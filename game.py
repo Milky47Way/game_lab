@@ -69,7 +69,7 @@ w5 = Wall(154, 205, 50, 205, 48, 170, 10)
 
 
 
-player = Player('Picsart_24-03-03_16-20-54-518.png', 5, win_height - 80, 4) #xyspeed
+player = Player('Picsart_24-03-03_16-20-54-518.png', 5, win_height - 80, 4) #xy.speed
 monster = Enemy('Picsart_24-03-10_13-47-07-589.png', win_width - 80, 280, 3)
 
 
