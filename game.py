@@ -87,30 +87,36 @@ win = font1.render('You win!', True, (255, 215, 0))
 lose = font1.render('You lose!', True, (255, 0, 0))
 
 
+finish = False
 while game:
     for e in event.get():
         if e.type == QUIT:
             game = False
-    window.blit(background, (0,0))
-    player.update()
-    monster.update()
-    goal.reset()
-    player.reset()
-    monster.reset()
-    w1.draw_wall()
-    w2.draw_wall()
-    w3.draw_wall()
-    w4.draw_wall()
-    w5.draw_wall()
 
-    if sprite.collide_rect(player, goal):
-        window.blit(win, (200, 200))
-    if sprite.collide_rect(player, monster) or
-        sprite.collide_rect(player, w1) or
-        sprite.collide_rect(player, w2) or
-        sprite.collide_rect(player, w3) or
-        sprite.collide_rect(player, w4) or
-        sprite.collide_rect(player, w5) or
-        window.blit(lose, (200, 200))
+    if finish != True:
+
+
+        window.blit(background, (0,0))
+        player.update()
+        monster.update()
+        goal.reset()
+        player.reset()
+        monster.reset()
+        w1.draw_wall()
+        w2.draw_wall()
+        w3.draw_wall()
+        w4.draw_wall()
+        w5.draw_wall()
+
+        if sprite.collide_rect(player, goal):
+            finish = True
+            window.blit(win, (200, 200))
+        if sprite.collide_rect(player, monster) or sprite.collide_rect(player, w1) or sprite.collide_rect(player, w2) or sprite.collide_rect(player, w3) or sprite.collide_rect(player, w4) or sprite.collide_rect(player, w5) or 
+            finish = True
+            window.blit(lose, (200, 200))
+    else:
+        time.delay(3000)
+        finish = False
+        player = Player('Picsart_24-03-03_16-20-54-518.png', 5, win_height -80,4)
     display.update()
     clock.tick(FPS)
